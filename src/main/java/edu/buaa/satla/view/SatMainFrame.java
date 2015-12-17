@@ -1,4 +1,4 @@
-package edu.buaa.gaof.view;
+package edu.buaa.satla.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -45,30 +45,55 @@ public class SatMainFrame extends JFrame {
 		specButton = new JButton("选择规则文件");
 		startButton = new JButton("开始分析");
 		
-		northPanel.add(srcButton, new GBC(0, 0));
-		northPanel.add(specButton, new GBC(1, 0));
-		northPanel.add(startButton, new GBC(2, 0));
+		northPanel.add(srcButton, new GBC(0, 0).setInset(3));
+		northPanel.add(specButton, new GBC(1, 0).setInset(3));
+		northPanel.add(startButton, new GBC(2, 0).setInset(3));
 		getContentPane().add(northPanel, BorderLayout.NORTH);
 
 		// 左侧区域（配置项，规则文件）
 		JPanel westPanel = new JPanel(new BorderLayout());
-		// 配置项
-		JPanel configPanel = new JPanel(new GridBagLayout());
-		configPanel.setBorder(BorderFactory.createTitledBorder("配置项"));
+		// 基本配置项
+		JPanel basicConfigPanel = new JPanel(new GridBagLayout());
+		basicConfigPanel.setBorder(BorderFactory.createTitledBorder("基本配置"));
 		JLabel timeLimitLabel = new JLabel("时间限制：");
-		configPanel.add(timeLimitLabel, new GBC(0, 0).setInset(4));
-		JTextField timeLimitField = new JTextField(6);
-		configPanel.add(timeLimitField, new GBC(1, 0));
-		JLabel secLabel = new JLabel(" 秒");
-		configPanel.add(secLabel, new GBC(2, 0));
-		westPanel.add(configPanel, BorderLayout.NORTH);
-		// 规则文件
-		JPanel specPanel = new JPanel(new BorderLayout());
-		specPanel.setBorder(BorderFactory.createTitledBorder("规则文件"));
-		specArea = new JTextArea();
-		JScrollPane specJsp = new JScrollPane(specArea);// 给文本区添加滚动条
-		specPanel.add(specJsp, BorderLayout.CENTER);
-		westPanel.add(specPanel, BorderLayout.CENTER);
+		basicConfigPanel.add(timeLimitLabel, new GBC(0, 0).setInset(3));
+		timeLimitField = new JTextField(6);
+		timeLimitField.setText("600");
+		basicConfigPanel.add(timeLimitField, new GBC(1, 0).setInset(3));
+		JLabel secLabel = new JLabel("秒");
+		basicConfigPanel.add(secLabel, new GBC(2, 0).setInset(3));
+		JLabel specLabel = new JLabel("规则文件：");
+		basicConfigPanel.add(specLabel, new GBC(0, 1));
+		specFileLabel = new JLabel("未选择");
+		specFileLabel.setForeground(Color.RED);
+		basicConfigPanel.add(specFileLabel, new GBC(1, 1));
+
+		westPanel.add(basicConfigPanel, BorderLayout.NORTH);
+		// 谓词相关配置
+		JPanel predConfigPanel = new JPanel(new GridBagLayout());
+		predConfigPanel.setBorder(BorderFactory.createTitledBorder("谓词配置"));
+		JLabel predUpLimitLabel = new JLabel("谓词集合大小上限：");
+		predConfigPanel.add(predUpLimitLabel, new GBC(0, 0).setInset(3));
+		predUpLimitField = new JTextField(6);
+		predUpLimitField.setText("50");// 默认50
+		predConfigPanel.add(predUpLimitField, new GBC(1, 0).setInset(3));
+
+		JLabel predFreUpLimitLabel = new JLabel("谓词频度上限：");
+		predConfigPanel.add(predFreUpLimitLabel, new GBC(0, 1).setInset(3));
+		predFreUpLimitField = new JTextField(6);
+		predConfigPanel.add(predFreUpLimitField, new GBC(1, 1).setInset(3));
+		JLabel predFreDownLimitLabel = new JLabel("谓词频度下限：");
+		predConfigPanel.add(predFreDownLimitLabel, new GBC(0, 2).setInset(3));
+		predFreDownLimitField = new JTextField(6);
+		predConfigPanel.add(predFreDownLimitField, new GBC(1, 2).setInset(3));
+
+		westPanel.add(predConfigPanel, BorderLayout.SOUTH);
+
+		// JPanel specPanel = new JPanel(new BorderLayout());
+		// specPanel.setBorder(BorderFactory.createTitledBorder("谓词配置"));
+		// specArea = new JTextArea();
+		// JScrollPane specJsp = new JScrollPane(specArea);// 给文本区添加滚动条
+		// specPanel.add(specJsp, BorderLayout.CENTER);
 
 		getContentPane().add(westPanel, BorderLayout.WEST);
 
@@ -166,7 +191,72 @@ public class SatMainFrame extends JFrame {
 	private JTextArea srcArea;
 	private JTextArea outputArea;
 
+	private JTextField timeLimitField;
+	private JTextField predUpLimitField;
+	private JTextField predFreUpLimitField;
+	private JTextField predFreDownLimitField;
+
+	private JLabel specFileLabel;
+	private JLabel predFreUpLimitLabel;
+	private JLabel predFreDownLimitLabel;
+
 	private SatActionListener satActionListener;
+
+	public JTextField getTimeLimitField() {
+		return timeLimitField;
+	}
+
+	public void setTimeLimitField(JTextField timeLimitField) {
+		this.timeLimitField = timeLimitField;
+	}
+
+	public JTextField getPredUpLimitField() {
+		return predUpLimitField;
+	}
+
+	public void setPredUpLimitField(JTextField predUpLimitField) {
+		this.predUpLimitField = predUpLimitField;
+	}
+
+	public JTextField getPredFreUpLimitField() {
+		return predFreUpLimitField;
+	}
+
+	public void setPredFreUpLimitField(JTextField predFreUpLimitField) {
+		this.predFreUpLimitField = predFreUpLimitField;
+	}
+
+	public JTextField getPredFreDownLimitField() {
+		return predFreDownLimitField;
+	}
+
+	public void setPredFreDownLimitField(JTextField predFreDownLimitField) {
+		this.predFreDownLimitField = predFreDownLimitField;
+	}
+
+	public JLabel getSpecFileLabel() {
+		return specFileLabel;
+	}
+
+	public void setSpecFileLabel(JLabel specFileLabel) {
+		this.specFileLabel = specFileLabel;
+	}
+
+	public JLabel getPredFreUpLimitLabel() {
+		return predFreUpLimitLabel;
+	}
+
+	public void setPredFreUpLimitLabel(JLabel predFreUpLimitLabel) {
+		this.predFreUpLimitLabel = predFreUpLimitLabel;
+	}
+
+	public JLabel getPredFreDownLimitLabel() {
+		return predFreDownLimitLabel;
+	}
+
+	public void setPredFreDownLimitLabel(JLabel predFreDownLimitLabel) {
+		this.predFreDownLimitLabel = predFreDownLimitLabel;
+	}
 
 	public JMenuBar getMenubar() {
 		return menubar;

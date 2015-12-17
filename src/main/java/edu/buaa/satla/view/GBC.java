@@ -1,4 +1,4 @@
-package edu.buaa.gaof.view;
+package edu.buaa.satla.view;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;

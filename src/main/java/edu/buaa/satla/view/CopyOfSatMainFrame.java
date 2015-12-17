@@ -1,4 +1,4 @@
-package edu.buaa.gaof.view;
+package edu.buaa.satla.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

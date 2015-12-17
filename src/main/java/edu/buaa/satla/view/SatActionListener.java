@@ -1,5 +1,6 @@
-package edu.buaa.gaof.view;
+package edu.buaa.satla.view;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -10,12 +11,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class SatActionListener implements ActionListener {
 
 	private final SatMainFrame satMainFrame;
+
+	private File specFile;// 规则文件
+
+	private File srcFile;// 源代码文件
 
 	public SatActionListener(final SatMainFrame satMainFrame) {
 		this.satMainFrame = satMainFrame;
@@ -67,12 +73,34 @@ public class SatActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String name = e.getActionCommand();
 		if (name.equals("选择源代码")) {
-			setTextArea(getChosenFile(SatConstants.TEST_DIR_PATH, true),
-					satMainFrame.getSrcArea());
+			srcFile = getChosenFile(SatConstants.TEST_DIR_PATH, true);
+			setTextArea(srcFile, satMainFrame.getSrcArea());
 		} else if (name.equals("选择规则文件")) {
-			setTextArea(getChosenFile(SatConstants.SPEC_DIR_PATH, false),
-					satMainFrame.getSpecArea());
+			// setTextArea(getChosenFile(SatConstants.SPEC_DIR_PATH, false),
+			// satMainFrame.getSpecArea());
+			specFile = getChosenFile(SatConstants.SPEC_DIR_PATH, false);
+			if (specFile == null)
+				return;
+			if (specFile.exists()) {
+				String fileName = specFile.getName();
+				satMainFrame.getSpecFileLabel().setText(fileName);
+				satMainFrame.getSpecFileLabel().setForeground(Color.BLACK);
+			}
 		} else if (name.equals("开始分析")) {
+			if (specFile == null) {
+				JOptionPane.showMessageDialog(null, "请选择规则文件！");
+			}
+			if (srcFile == null) {
+				JOptionPane.showMessageDialog(null, "请选择源代码文件！");
+			}
+
+			// 三个谓词界限
+			int maxPredSetSize = Integer.parseInt(satMainFrame
+					.getPredUpLimitField().getText());
+			int predFreDownLimit = Integer.parseInt(satMainFrame
+					.getPredFreDownLimitField().getText());
+			int predFreUpLimit = Integer.parseInt(satMainFrame
+					.getPredFreUpLimitField().getText());
 
 		}
 	}

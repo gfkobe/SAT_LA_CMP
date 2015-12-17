@@ -1,4 +1,4 @@
-package edu.buaa.gaof.view;
+package edu.buaa.satla.view;
 
 public class SatConstants {
 	public static String TEST_DIR_PATH = System.getProperty("user.dir")
