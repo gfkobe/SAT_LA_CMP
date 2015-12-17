@@ -27,15 +27,22 @@ public class SatMainFrame extends JFrame {
 		getContentPane().setLayout(new BorderLayout(5, 10));
 
 		// 菜单项
-		JMenuItem userLoginMenu = new JMenuItem("用户登录");
+		JMenuItem srcMenuItem = new JMenuItem("选择源代码");
 		// userLoginMenu.addActionListener(new LoginActionListener());
-		JMenuItem exitLoginMenu = new JMenuItem("退出");
-		LoginMenu.add(userLoginMenu);
-		LoginMenu.add(exitLoginMenu);
-		menubar.add(LoginMenu);
-		menubar.add(UserMangeMenu);
-		menubar.add(SchoolMangeMenu);
-		menubar.add(HelpMenu);
+		JMenuItem specMenuItem = new JMenuItem("选择规则文件");
+		JMenuItem exitMenuItem = new JMenuItem("退出");
+		fileMenu.add(srcMenuItem);
+		fileMenu.add(specMenuItem);
+		fileMenu.add(exitMenuItem);
+		JMenuItem analysisMenuItem = new JMenuItem("开始分析");
+		analysisMenu.add(analysisMenuItem);
+		// menubar.add(SchoolMangeMenu);
+		JMenuItem helpMenuItem = new JMenuItem("关于");
+		helpMenu.add(helpMenuItem);
+
+		menubar.add(fileMenu);
+		menubar.add(analysisMenu);
+		menubar.add(helpMenu);
 		setJMenuBar(menubar);
 		// getContentPane().add(menubar, BorderLayout.NORTH);
 
@@ -137,8 +144,10 @@ public class SatMainFrame extends JFrame {
 		JPanel resultPanel = new JPanel(new GridBagLayout());
 		cfaButton = new JButton("查看CFA");
 		argButton = new JButton("查看ARG");
-		resultPanel.add(cfaButton, new GBC(0, 0));
-		resultPanel.add(argButton, new GBC(1, 0));
+		openButton = new JButton("打开输出文件夹");
+		resultPanel.add(cfaButton, new GBC(0, 0).setInset(3));
+		resultPanel.add(argButton, new GBC(1, 0).setInset(3));
+		resultPanel.add(openButton, new GBC(2, 0).setInset(3));
 		southPanel.add(resultPanel, BorderLayout.NORTH);
 		// 控制台输出
 		outputArea = new JTextArea(5, 1);// 设置为5行
@@ -175,10 +184,10 @@ public class SatMainFrame extends JFrame {
 	}
 
 	private JMenuBar menubar = new JMenuBar();
-	private JMenu LoginMenu = new JMenu("系统登录");
-	private JMenu UserMangeMenu = new JMenu("用户管理");
-	private JMenu SchoolMangeMenu = new JMenu("学籍管理");
-	private JMenu HelpMenu = new JMenu("关于");
+	private JMenu fileMenu = new JMenu("文件");
+	private JMenu analysisMenu = new JMenu("分析");
+	// private JMenu SchoolMangeMenu = new JMenu("学籍管理");
+	private JMenu helpMenu = new JMenu("关于");
 
 	private JButton srcButton;// 选择源代码
 	private JButton specButton;// 选择规则文件
@@ -186,6 +195,7 @@ public class SatMainFrame extends JFrame {
 
 	private JButton cfaButton;// 查看CFA
 	private JButton argButton;// 查看ARG
+	private JButton openButton;// 查看ARG
 
 	private JTextArea specArea;
 	private JTextArea srcArea;
@@ -266,36 +276,36 @@ public class SatMainFrame extends JFrame {
 		this.menubar = menubar;
 	}
 
-	public JMenu getLoginMenu() {
-		return LoginMenu;
+	public JMenu getFileMenu() {
+		return fileMenu;
 	}
 
-	public void setLoginMenu(JMenu loginMenu) {
-		LoginMenu = loginMenu;
+	public void setFileMenu(JMenu fileMenu) {
+		this.fileMenu = fileMenu;
 	}
 
-	public JMenu getUserMangeMenu() {
-		return UserMangeMenu;
+	public JMenu getAnalysisMenu() {
+		return analysisMenu;
 	}
 
-	public void setUserMangeMenu(JMenu userMangeMenu) {
-		UserMangeMenu = userMangeMenu;
+	public void setAnalysisMenu(JMenu analysisMenu) {
+		this.analysisMenu = analysisMenu;
 	}
 
-	public JMenu getSchoolMangeMenu() {
-		return SchoolMangeMenu;
-	}
-
-	public void setSchoolMangeMenu(JMenu schoolMangeMenu) {
-		SchoolMangeMenu = schoolMangeMenu;
-	}
+	// public JMenu getSchoolMangeMenu() {
+	// return SchoolMangeMenu;
+	// }
+	//
+	// public void setSchoolMangeMenu(JMenu schoolMangeMenu) {
+	// SchoolMangeMenu = schoolMangeMenu;
+	// }
 
 	public JMenu getHelpMenu() {
-		return HelpMenu;
+		return helpMenu;
 	}
 
 	public void setHelpMenu(JMenu helpMenu) {
-		HelpMenu = helpMenu;
+		this.helpMenu = helpMenu;
 	}
 
 	public JButton getSrcButton() {

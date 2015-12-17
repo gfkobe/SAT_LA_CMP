@@ -23,6 +23,8 @@ public class SatActionListener implements ActionListener {
 
 	private File srcFile;// 源代码文件
 
+	private File outputDir;
+
 	public SatActionListener(final SatMainFrame satMainFrame) {
 		this.satMainFrame = satMainFrame;
 	}
@@ -102,6 +104,16 @@ public class SatActionListener implements ActionListener {
 			int predFreUpLimit = Integer.parseInt(satMainFrame
 					.getPredFreUpLimitField().getText());
 
+		} else if (name.equals("打开输出文件夹")) {
+			if (outputDir == null) {
+				return;
+			}
+			try {
+				Runtime.getRuntime().exec(
+						"cmd /c start explorer " + outputDir.getAbsolutePath());
+			} catch (IOException e1) {
+				JOptionPane.showMessageDialog(null, "打开失败！文件路径：");
+			}
 		}
 	}
 
