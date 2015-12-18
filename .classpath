@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="target/classes" path="src/main/java">
-		<attributes>
-			<attribute name="optional" value="true"/>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="src" path="src/main/test"/>
-	<classpathentry kind="src" path="src/main/resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_03">
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="libs/jcommon-1.0.21.jar"/>
+	<classpathentry kind="lib" path="libs/jfreechart-1.0.17.jar"/>
+	<classpathentry kind="lib" path="libs/mathsat.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/common.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/guava.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/icu4j.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/java-cup-runtime.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/javabdd.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/org.eclipse.cdt.core.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/org.eclipse.core.contenttype.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/org.eclipse.core.jobs.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/org.eclipse.core.resources.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/org.eclipse.core.runtime.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/org.eclipse.equinox.common.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/org.eclipse.equinox.preferences.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/org.eclipse.jdt.core.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/org.eclipse.osgi.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/princess.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/scala-actors.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/scala-library.jar"/>
+	<classpathentry kind="lib" path="libs/lib/java/runtime/smtinterpol-comp.jar"/>
+	<classpathentry kind="lib" path="libs/lib/apron.jar"/>
+	<classpathentry kind="lib" path="libs/lib/edu.cmu.sei.rtss.jldd.jar"/>
+	<classpathentry kind="lib" path="libs/lib/gmp.jar"/>
+	<classpathentry kind="lib" path="libs/lib/jpl.jar"/>
+	<classpathentry kind="lib" path="libs/lib/jsylvan.jar"/>
+	<classpathentry kind="lib" path="libs/lib/meconsole010.jar"/>
+	<classpathentry kind="lib" path="libs/sat_lucky.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
