@@ -1,0 +1,16 @@
+int main() 
+{
+	
+
+	int a = 1;
+int *p = &a, *q = &a, *p1;
+*p = 1;
+*q = 0;
+p1 = p;
+*p1 = 1;
+if (a == 0)
+	goto ERROR;
+	return 0;
+ERROR:
+	return 1;
+}

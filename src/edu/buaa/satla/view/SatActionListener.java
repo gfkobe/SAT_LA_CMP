@@ -4,11 +4,14 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Properties;
 
 import javax.swing.JFileChooser;
@@ -29,7 +32,7 @@ public class SatActionListener implements ActionListener {
 
 	private File srcFile;// 源代码文件
 
-	private File outputDir;
+	private String outputpath;
 	
 	private JTextArea outputArea;
 	
@@ -112,9 +115,9 @@ public class SatActionListener implements ActionListener {
 //			if (specFile == null) {
 //				JOptionPane.showMessageDialog(null, "请选择规则文件！");
 //			}
-//			if (srcFile == null) {
-//				JOptionPane.showMessageDialog(null, "请选择源代码文件！");
-//			}
+			if (srcFile == null) {
+				JOptionPane.showMessageDialog(null, "请选择源代码文件！");
+			}
 			outputArea.append("系统开始分析...\n");
 			// 三个谓词界限
 			try {
@@ -140,26 +143,60 @@ public class SatActionListener implements ActionListener {
 				outputArea.append("谓词频度下限未设置，默认值为：" + predFreUpLimit +"\n");
 			}
 			
-			GlobalInfo.setOutputArea(outputArea);
+			GlobalInfo.getInstance().setOutputArea(outputArea);
 			
-			Properties config = new Properties();
-			config.load(new FileInputStream("libs/config/predicateAnalysis.properties"));
+			// 更新配置文件
+//			Properties config = new Properties();
+//			try {
+//				config.load(new FileInputStream("libs/config/predicateAnalysis.properties"));
+//				String outputDir = config.getProperty("output.path");
+//				String includeFile = config.getProperty("include");
+//				outputDir = outputDir + "/" + srcFile.getName();
+//				config.setProperty("output.path", outputDir);
+//				FileOutputStream fos = new FileOutputStream("libs/config/satla.properties");
+//				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+//				bw.write("#include " + includeFile);
+//				config.store(fos, null);
+//			} catch (IOException e1) {
+//				e1.printStackTrace();
+//			}
 			
-			String[] args = new String[2];
+			String[] args = new String[4];
 			args[0] = "-predicateAnalysis";
-//			args[1] = srcFile.getAbsolutePath();
-			args[1] = "/home/gf/test/my/emp2-bug-15.c";
-			CPAMain.main(args);
+			args[1] = "-outputpath";
+			String srcname = srcFile.getName();
+			args[2] = "output" + File.separator + srcname.substring(0, srcname.lastIndexOf("."));
+			outputpath = args[2];
+			args[3] = srcFile.getAbsolutePath();
+//			args[3] = "/home/gf/test/my/emp2-bug-15.c";
+			
+			Thread analysis = new AnalysisThread(args);
+			analysis.start();
+//				analysis.join();
 		} else if (name.equals("打开输出文件夹")) {
-			if (outputDir == null) {
+			if (outputpath == null) {
 				return;
 			}
 			try {
 				Runtime.getRuntime().exec(
-						"cmd /c start explorer " + outputDir.getAbsolutePath());
+						"nautilus " + new File(outputpath).getAbsolutePath());
+//				Runtime.getRuntime().exec(
+//						"cmd /c start explorer " + outputDir.getAbsolutePath());
 			} catch (IOException e1) {
 				JOptionPane.showMessageDialog(null, "打开失败！文件路径：");
 			}
+		}
+	}
+	
+	private class AnalysisThread extends Thread {
+		private String[] args;
+		
+		public AnalysisThread(String[] args) {
+			this.args = args;
+		}
+		
+		public void run() {
+			CPAMain.main(args);
 		}
 	}
 

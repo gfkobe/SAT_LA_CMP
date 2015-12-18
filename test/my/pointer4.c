@@ -1,0 +1,14 @@
+int main() 
+{
+	
+
+	int a[5] = {0,1,0,3,4};
+int *q = &a[1];
+q = q + 2;
+*q = 2;
+if (a[2] == 0)
+	goto ERROR;
+	return 0;
+ERROR:
+	return 1;
+}

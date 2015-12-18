@@ -1,0 +1,22 @@
+(declare-fun |main::x| () Int)
+(declare-fun |main::x1| () Int)
+(declare-fun |main::i| () Int)
+(declare-fun |main::i@1| () Int)
+
+(declare-fun .def_72 () Bool)
+(declare-fun .def_77 () Bool)
+(declare-fun .def_117 () Bool)
+(declare-fun .def_172 () Bool)
+(declare-fun .def_177 () Bool)
+
+(define-fun .def_72 () Bool (<= |main::x| 15))
+(define-fun .def_77 () Bool (<= 10 |main::x|))
+(define-fun .def_117 () Bool (= (+ |main::x| 1) |main::x1|))
+(define-fun .def_172 () Bool (<= |main::x1| 15))
+(define-fun .def_177 () Bool (<= 10 |main::x1|))
+
+
+
+(check-allsat (.def_77 .def_72 .def_177 .def_172))
+
+(exit)

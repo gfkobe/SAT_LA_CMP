@@ -1,0 +1,16 @@
+int gl_a=0;
+int gl_b=1;
+int gl_c=2;
+
+int main() 
+{
+	
+
+	int a[5]={1,2,3,4,5};
+a[2]=4;
+if (a[4] == 5)
+	goto ERROR;
+	return 0;
+ERROR:
+	return 1;
+}
