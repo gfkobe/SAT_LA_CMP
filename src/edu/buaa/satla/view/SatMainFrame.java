@@ -81,18 +81,25 @@ public class SatMainFrame extends JFrame {
 		predConfigPanel.setBorder(BorderFactory.createTitledBorder("谓词配置"));
 		JLabel predUpLimitLabel = new JLabel("谓词集合大小上限：");
 		predConfigPanel.add(predUpLimitLabel, new GBC(0, 0).setInset(3));
-		predUpLimitField = new JTextField(6);
+		predUpLimitField = new JTextField(4);
 		predUpLimitField.setText("50");// 默认50
 		predConfigPanel.add(predUpLimitField, new GBC(1, 0).setInset(3));
 
 		JLabel predFreUpLimitLabel = new JLabel("谓词频度上限：");
 		predConfigPanel.add(predFreUpLimitLabel, new GBC(0, 1).setInset(3));
-		predFreUpLimitField = new JTextField(6);
+		predFreUpLimitField = new JTextField(4);
+		predFreUpLimitField.setText("20");
 		predConfigPanel.add(predFreUpLimitField, new GBC(1, 1).setInset(3));
 		JLabel predFreDownLimitLabel = new JLabel("谓词频度下限：");
 		predConfigPanel.add(predFreDownLimitLabel, new GBC(0, 2).setInset(3));
-		predFreDownLimitField = new JTextField(6);
+		predFreDownLimitField = new JTextField(4);
+		predFreDownLimitField.setText("5");
 		predConfigPanel.add(predFreDownLimitField, new GBC(1, 2).setInset(3));
+		JLabel predRedUpLimitLabel = new JLabel("谓词冗余度上限：");
+		predConfigPanel.add(predRedUpLimitLabel, new GBC(0, 3).setInset(3));
+		predRedUpLimitField = new JTextField(4);
+		predRedUpLimitField.setText("2");
+		predConfigPanel.add(predRedUpLimitField, new GBC(1, 3).setInset(3));
 
 		westPanel.add(predConfigPanel, BorderLayout.SOUTH);
 
@@ -142,13 +149,13 @@ public class SatMainFrame extends JFrame {
 		southPanel.setBorder(BorderFactory.createTitledBorder("结果输出"));
 		// 结果查看操作
 		JPanel resultPanel = new JPanel(new GridBagLayout());
-		cfaButton = new JButton("查看CFA");
-		argButton = new JButton("查看ARG");
-		openButton = new JButton("打开输出文件夹");
-		resultPanel.add(cfaButton, new GBC(0, 0).setInset(3));
-		resultPanel.add(argButton, new GBC(1, 0).setInset(3));
-		resultPanel.add(openButton, new GBC(2, 0).setInset(3));
-		southPanel.add(resultPanel, BorderLayout.NORTH);
+		// cfaButton = new JButton("查看CFA");
+		// argButton = new JButton("查看ARG");
+		// openButton = new JButton("打开输出文件夹");
+		// resultPanel.add(cfaButton, new GBC(0, 0).setInset(3));
+		// resultPanel.add(argButton, new GBC(1, 0).setInset(3));
+		// resultPanel.add(openButton, new GBC(0, 0).setInset(3));
+		// southPanel.add(resultPanel, BorderLayout.NORTH);
 		// 控制台输出
 		outputArea = new JTextArea(5, 1);// 设置为5行
 		JScrollPane outJsp = new JScrollPane(outputArea);// 给文本区添加滚动条
@@ -161,8 +168,9 @@ public class SatMainFrame extends JFrame {
 		srcButton.addActionListener(satActionListener);
 		specButton.addActionListener(satActionListener);
 		startButton.addActionListener(satActionListener);
-		cfaButton.addActionListener(satActionListener);
-		argButton.addActionListener(satActionListener);
+		// cfaButton.addActionListener(satActionListener);
+		// argButton.addActionListener(satActionListener);
+		// openButton.addActionListener(satActionListener);
 
 	}
 	
@@ -193,9 +201,9 @@ public class SatMainFrame extends JFrame {
 	private JButton specButton;// 选择规则文件
 	private JButton startButton;// 开始分析
 
-	private JButton cfaButton;// 查看CFA
-	private JButton argButton;// 查看ARG
-	private JButton openButton;// 查看ARG
+	// private JButton cfaButton;// 查看CFA
+	// private JButton argButton;// 查看ARG
+	// private JButton openButton;// 查看ARG
 
 	private JTextArea specArea;
 	private JTextArea srcArea;
@@ -205,12 +213,21 @@ public class SatMainFrame extends JFrame {
 	private JTextField predUpLimitField;
 	private JTextField predFreUpLimitField;
 	private JTextField predFreDownLimitField;
+	private JTextField predRedUpLimitField;
 
 	private JLabel specFileLabel;
 	private JLabel predFreUpLimitLabel;
 	private JLabel predFreDownLimitLabel;
 
 	private SatActionListener satActionListener;
+
+	public JTextField getPredRedUpLimitField() {
+		return predRedUpLimitField;
+	}
+
+	public void setPredRedUpLimitField(JTextField predRedUpLimitField) {
+		this.predRedUpLimitField = predRedUpLimitField;
+	}
 
 	public JTextField getTimeLimitField() {
 		return timeLimitField;
@@ -332,25 +349,33 @@ public class SatMainFrame extends JFrame {
 		this.startButton = startButton;
 	}
 
-	public JButton getCfaButton() {
-		return cfaButton;
-	}
-
-	public void setCfaButton(JButton cfaButton) {
-		this.cfaButton = cfaButton;
-	}
-
-	public JButton getArgButton() {
-		return argButton;
-	}
-
-	public void setArgButton(JButton argButton) {
-		this.argButton = argButton;
-	}
+	// public JButton getCfaButton() {
+	// return cfaButton;
+	// }
+	//
+	// public void setCfaButton(JButton cfaButton) {
+	// this.cfaButton = cfaButton;
+	// }
+	//
+	// public JButton getArgButton() {
+	// return argButton;
+	// }
+	//
+	// public void setArgButton(JButton argButton) {
+	// this.argButton = argButton;
+	// }
 
 	public JTextArea getSpecArea() {
 		return specArea;
 	}
+
+	// public JButton getOpenButton() {
+	// return openButton;
+	// }
+	//
+	// public void setOpenButton(JButton openButton) {
+	// this.openButton = openButton;
+	// }
 
 	public void setSpecArea(JTextArea specArea) {
 		this.specArea = specArea;

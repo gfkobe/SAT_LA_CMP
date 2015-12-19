@@ -4,15 +4,11 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.Properties;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -21,8 +17,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.sosy_lab.cpachecker.cmdline.CPAMain;
 import org.sosy_lab.cpachecker.util.globalinfo.GlobalInfo;
-
-import com.sun.corba.se.spi.orb.StringPair;
 
 public class SatActionListener implements ActionListener {
 
@@ -178,10 +172,11 @@ public class SatActionListener implements ActionListener {
 				return;
 			}
 			try {
+				// Runtime.getRuntime().exec(
+				// "nautilus " + new File(outputpath).getAbsolutePath());
 				Runtime.getRuntime().exec(
-						"nautilus " + new File(outputpath).getAbsolutePath());
-//				Runtime.getRuntime().exec(
-//						"cmd /c start explorer " + outputDir.getAbsolutePath());
+						"cmd /c start explorer "
+								+ new File(outputpath).getAbsolutePath());
 			} catch (IOException e1) {
 				JOptionPane.showMessageDialog(null, "打开失败！文件路径：");
 			}
